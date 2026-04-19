@@ -1,5 +1,3 @@
-
-
 /** @type { import('@storybook/react-vite').StorybookConfig } */
 const config = {
   "stories": [
@@ -13,6 +11,19 @@ const config = {
     "@storybook/addon-docs",
     "@storybook/addon-onboarding"
   ],
-  "framework": "@storybook/react-vite"
+  "framework": "@storybook/react-vite",
+  viteFinal: (config) => {
+    // Rolldown (Vite 6) resolves Storybook's "code" export condition to raw .ts
+    // source files. Filter it out so the compiled "default" condition is used.
+    config.resolve = config.resolve || {};
+    config.resolve.conditions = (config.resolve.conditions || []).filter(
+      (c) => c !== 'code'
+    );
+
+    config.optimizeDeps = config.optimizeDeps || {};
+    config.optimizeDeps.include = config.optimizeDeps.include || [];
+    config.optimizeDeps.include.push('@storybook/addon-docs/blocks');
+    return config;
+  },
 };
 export default config;

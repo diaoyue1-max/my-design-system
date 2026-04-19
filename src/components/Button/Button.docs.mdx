@@ -1,6 +1,26 @@
-import { Meta } from '@storybook/blocks';
+import { Meta, Canvas, Controls, Story } from '@storybook/addon-docs/blocks';
+import * as ButtonStories from './Button.stories.jsx';
 
-<Meta title="Components/Button/Guidelines" />
+<Meta of={ButtonStories} />
+
+# Button
+
+Use Button for all primary user interactions across the product.
+
+---
+
+## Live Preview
+
+<Canvas of={ButtonStories.Primary} />
+<Controls of={ButtonStories.Primary} />
+
+---
+
+## Variants
+
+<Canvas of={ButtonStories.AllVariants} />
+
+---
 
 ## Handoff Rules
 
